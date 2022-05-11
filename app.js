@@ -20,7 +20,6 @@ app.use(
     credentials: true,
     origin: [process.env.CORS_ORIGIN],
     methods: ["GET", "PUT", "POST", "DELETE", "PATCH", "HEAD", "OPTIONS"],
-    preflightContinue: false,
     allowedHeaders: ["Accept", "Content-Type", "X-Requested-With", "x-api-key"],
   })
 );
