@@ -20,8 +20,6 @@ app.use(
   cors({
     credentials: true,
     origin: [process.env.CORS_ORIGIN],
-    exposedHeaders:
-      "Origin, X-Requested-With, Content-Type, Accept, Authorization",
   })
 );
 
@@ -29,6 +27,8 @@ app.options(
   "https://cocktails-node-js.herokuapp.com",
   cors({
     methods: "PUT, POST, PATCH, DELETE, GET",
+    allowedHeaders:
+      "Origin, X-Requested-With, Content-Type, Accept, Authorization",
   })
 );
 
