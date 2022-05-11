@@ -28,7 +28,7 @@ app.options(
   cors({
     methods: "PUT, POST, PATCH, DELETE, GET",
     allowedHeaders:
-      "Origin, X-Requested-With, Content-Type, Accept, Authorization",
+      "*, Origin, X-Requested-With, Content-Type, Accept, Authorization",
   })
 );
 
