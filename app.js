@@ -31,13 +31,6 @@ app.options(
       "Origin, X-Requested-With, Content-Type, Accept, Authorization",
   })
 );
-app.del(
-  "https://cocktails-node-js.herokuapp.com/cocktails/:id",
-  cors(),
-  function (req, res, next) {
-    res.json({ msg: "This is CORS-enabled for all origins!" });
-  }
-);
 
 app.use(helmet());
 

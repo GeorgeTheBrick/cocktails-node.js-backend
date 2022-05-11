@@ -22,7 +22,7 @@ const createSendToken = (user, statusCode, req, res) => {
     httpOnly: true,
 
     secure: true,
-    sameSite: "None",
+    sameSite: "Lax",
   });
 
   user.password = undefined;
@@ -64,7 +64,7 @@ exports.logout = (req, res) => {
     expires: new Date(Date.now() + 3 * 1000),
     httpOnly: true,
     secure: true,
-    sameSite: "None",
+    sameSite: "Lax",
   });
   res.status(200).json({ status: "success" });
 };
