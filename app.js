@@ -15,14 +15,14 @@ const app = express();
 
 app.enable("trust proxy");
 
-app.use(
-  cors({
-    credentials: true,
-    origin: [process.env.CORS_ORIGIN],
-  })
-);
+// app.use(
+//   cors({
+//     credentials: true,
+//     origin: [process.env.CORS_ORIGIN],
+//   })
+// );
 
-app.options("/api", cors());
+// app.options("/api", cors());
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", process.env.CORS_ORIGIN);
