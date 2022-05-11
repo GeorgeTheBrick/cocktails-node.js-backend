@@ -20,20 +20,7 @@ app.use(
     credentials: true,
     origin: [process.env.CORS_ORIGIN],
     methods: ["GET", "PUT", "POST", "DELETE", "PATCH", "HEAD", "OPTIONS"],
-    allowedHeaders: [
-      "Accept",
-      "Origin",
-      "Content-Type",
-      "X-LS-CORS-Template",
-      "X-LS-Auth-Token",
-      "X-LS-Auth-User-Token",
-      "Content-Type",
-      "X-LS-Sync-Result",
-      "X-LS-Sequence",
-      "token",
-      "X-Requested-With",
-      "x-api-key",
-    ],
+    allowedHeaders: "*",
   })
 );
 
