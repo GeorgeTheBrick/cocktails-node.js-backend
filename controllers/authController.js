@@ -22,7 +22,7 @@ const createSendToken = (user, statusCode, req, res) => {
     httpOnly: true,
 
     secure: true,
-    sameSite: "Lax",
+    sameSite: "None",
     domain: process.env.CORS_ORIGIN,
   });
 
@@ -65,7 +65,7 @@ exports.logout = (req, res) => {
     expires: new Date(Date.now() + 3 * 1000),
     httpOnly: true,
     secure: true,
-    sameSite: "Lax",
+    sameSite: "None",
     domain: process.env.CORS_ORIGIN,
   });
   res.status(200).json({ status: "success" });
