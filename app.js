@@ -31,6 +31,8 @@ app.use(
       "X-LS-Sync-Result",
       "X-LS-Sequence",
       "token",
+      "X-Requested-With",
+      "x-api-key",
     ],
   })
 );
