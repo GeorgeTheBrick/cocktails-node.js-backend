@@ -4,6 +4,7 @@ const User = require("./../models/userModel");
 const catchAsync = require("./../utils/catchAsync");
 const AppError = require("./../utils/appError");
 const Cocktail = require("../models/cocktailModel");
+const { json } = require("express/lib/response");
 
 const signToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -23,7 +24,7 @@ const createSendToken = (user, statusCode, req, res) => {
 
     secure: true,
     sameSite: "None",
-    // domain: process.env.CORS_ORIGIN,
+    domain: "cocktails-node-json.herokuapp.com",
   });
 
   user.password = undefined;
@@ -66,7 +67,7 @@ exports.logout = (req, res) => {
     httpOnly: true,
     secure: true,
     sameSite: "None",
-    // domain: process.env.CORS_ORIGIN,
+    domain: "cocktails-node-json.herokuapp.com",
   });
   res.status(200).json({ status: "success" });
 };
