@@ -23,6 +23,7 @@ const createSendToken = (user, statusCode, req, res) => {
 
     secure: true,
     sameSite: "Lax",
+    domain: process.env.CORS_ORIGIN,
   });
 
   user.password = undefined;
@@ -65,6 +66,7 @@ exports.logout = (req, res) => {
     httpOnly: true,
     secure: true,
     sameSite: "Lax",
+    domain: process.env.CORS_ORIGIN,
   });
   res.status(200).json({ status: "success" });
 };
