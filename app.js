@@ -20,11 +20,22 @@ app.use(
     credentials: true,
     origin: [process.env.CORS_ORIGIN],
     methods: ["GET", "PUT", "POST", "DELETE", "PATCH", "HEAD", "OPTIONS"],
-    allowedHeaders: ["Accept", "Content-Type", "X-Requested-With", "x-api-key"],
+    allowedHeaders: [
+      "Accept",
+      "Origin",
+      "Content-Type",
+      "X-LS-CORS-Template",
+      "X-LS-Auth-Token",
+      "X-LS-Auth-User-Token",
+      "Content-Type",
+      "X-LS-Sync-Result",
+      "X-LS-Sequence",
+      "token",
+    ],
   })
 );
 
-// app.options("/api", cors());
+app.options("https://cocktails-node-js.herokuapp.com", cors());
 
 app.use(helmet());
 
