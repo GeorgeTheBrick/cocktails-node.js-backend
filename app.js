@@ -20,15 +20,15 @@ app.use(
   cors({
     credentials: true,
     origin: [process.env.CORS_ORIGIN],
+    allowedHeaders:
+      "Origin, X-Requested-With, Content-Type, Accept, Authorization",
   })
 );
 
 app.options(
   "https://cocktails-node-js.herokuapp.com",
   cors({
-    credentials: true,
-    origin: [process.env.CORS_ORIGIN],
-    allowedHeaders: "X-Requested-With",
+    methods: "PUT, POST, PATCH, DELETE, GET",
   })
 );
 
@@ -41,18 +41,18 @@ if (process.env.NODE_ENV === "development") {
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", process.env.CORS_ORIGIN);
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-  );
-  if (req.method === "OPTIONS") {
-    res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
-    return res.status(200).json({});
-  }
-  next();
-});
+// app.use((req, res, next) => {
+//   res.header("Access-Control-Allow-Origin", process.env.CORS_ORIGIN);
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+//   );
+//   if (req.method === "OPTIONS") {
+//     res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
+//     return res.status(200).json({});
+//   }
+//   next();
+// });
 
 const limiter = rateLimit({
   max: 200,
