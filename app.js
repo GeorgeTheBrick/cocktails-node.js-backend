@@ -19,7 +19,6 @@ app.use(
   cors({
     credentials: true,
     origin: [process.env.CORS_ORIGIN],
-    allowedHeaders: "X-Requested-With",
   })
 );
 
