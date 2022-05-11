@@ -22,7 +22,13 @@ app.use(
   })
 );
 
-app.options("https://cocktails-node-js.herokuapp.com", cors());
+app.options(
+  "https://cocktails-node-js.herokuapp.com",
+  cors({
+    credentials: true,
+    origin: [process.env.CORS_ORIGIN],
+  })
+);
 
 app.use(helmet());
 
