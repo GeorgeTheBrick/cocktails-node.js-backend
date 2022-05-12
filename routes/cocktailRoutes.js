@@ -9,8 +9,10 @@ router
   .get(cocktailController.searchCocktails, cocktailController.getAllCocktails);
 // .post(authController.protect, cocktailController.createCocktail);
 
-router.route("/myCocktails");
-// .get(authController.protect, cocktailController.getMyCocktails);
+router.route("/myCocktails").get(
+  //  authController.protect,
+  cocktailController.getMyCocktails
+);
 
 router.route("/random").get(cocktailController.randomCocktail);
 router
