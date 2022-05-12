@@ -6,8 +6,11 @@ const router = express.Router();
 
 router
   .route("/")
-  .get(cocktailController.searchCocktails, cocktailController.getAllCocktails);
-// .post(authController.protect, cocktailController.createCocktail);
+  .get(cocktailController.searchCocktails, cocktailController.getAllCocktails)
+  .post(
+    // authController.protect,
+    cocktailController.createCocktail
+  );
 
 router.route("/myCocktails").get(
   //  authController.protect,

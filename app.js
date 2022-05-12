@@ -25,15 +25,6 @@ app.use(
 
 app.options("*", cors());
 
-// app.options(
-//   "https://cocktails-node-js.herokuapp.com",
-//   cors({
-//     methods: "PUT, POST, PATCH, DELETE, GET",
-//     allowedHeaders:
-//       "*, id, role, Origin, X-Requested-With, Content-Type, Accept, Authorization",
-//   })
-// );
-
 app.use(helmet());
 
 if (process.env.NODE_ENV === "development") {
