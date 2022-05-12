@@ -20,10 +20,8 @@ const createSendToken = (user, statusCode, req, res) => {
     ),
 
     httpOnly: true,
-    path: "/",
     secure: true,
     sameSite: "None",
-    domain: "cocktails-node-json.herokuapp.com",
   });
 
   user.password = undefined;
@@ -62,12 +60,10 @@ exports.login = catchAsync(async (req, res, next) => {
 
 exports.logout = (req, res) => {
   res.cookie("jwt", "loggedout", {
-    expires: new Date(Date.now() + 3 * 1000),
+    expires: new Date(Date.now() + 10 * 1000),
     httpOnly: true,
-    path: "/",
     secure: true,
     sameSite: "None",
-    domain: "cocktails-node-json.herokuapp.com",
   });
   res.status(200).json({ status: "success" });
 };
