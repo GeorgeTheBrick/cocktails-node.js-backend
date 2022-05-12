@@ -70,15 +70,10 @@ exports.logout = (req, res) => {
 };
 
 exports.protect = catchAsync(async (req, res, next) => {
+  //Added Local Storage JWT in case a cookie can't be stored in the browser (iOS)
   let token;
   let localToken;
-
-  if (req.headers.token) {
-    localToken = req.headers.token;
-  }
-  console.log(req.headers);
-  console.log(req.headers.token);
-  console.log(localToken);
+  let decoded;
 
   if (
     req.headers.authorization &&
@@ -89,16 +84,20 @@ exports.protect = catchAsync(async (req, res, next) => {
     token = req.cookies.jwt;
   }
 
+  if (req.headers.token) {
+    localToken = req.headers.token;
+  }
+
   if (!token) {
     if (!localToken) {
       return next(
-        new AppError("You are not logged in! Please log in to get access", 401)
+        new AppError("You are not logged in! Please log in to get access.", 401)
       );
     }
+    decoded = await promisify(jwt.verify)(localToken, process.env.JWT_SECRET);
+  } else {
+    decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
   }
-
-  const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
-
   const currentUser = await User.findById(decoded.id);
 
   if (decoded.id !== req.headers.id) {
@@ -128,6 +127,7 @@ exports.protect = catchAsync(async (req, res, next) => {
 
   req.user = currentUser;
   res.locals.user = currentUser;
+
   next();
 });
 
