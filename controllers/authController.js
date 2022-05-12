@@ -21,7 +21,7 @@ const createSendToken = (user, statusCode, req, res) => {
     ),
 
     httpOnly: true,
-
+    path: "/",
     secure: true,
     sameSite: "None",
     domain: "cocktails-node-json.herokuapp.com",
@@ -65,6 +65,7 @@ exports.logout = (req, res) => {
   res.cookie("jwt", "loggedout", {
     expires: new Date(Date.now() + 3 * 1000),
     httpOnly: true,
+    path: "/",
     secure: true,
     sameSite: "None",
     domain: "cocktails-node-json.herokuapp.com",
