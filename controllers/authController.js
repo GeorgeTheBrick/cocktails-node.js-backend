@@ -71,6 +71,15 @@ exports.logout = (req, res) => {
 
 exports.protect = catchAsync(async (req, res, next) => {
   let token;
+  let localToken;
+
+  if (req.headers.token) {
+    localToken = req.headers.token;
+  }
+  console.log(req.headers);
+  console.log(req.headers.token);
+  console.log(localToken);
+
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith("Bearer")
@@ -81,9 +90,11 @@ exports.protect = catchAsync(async (req, res, next) => {
   }
 
   if (!token) {
-    return next(
-      new AppError("You are not logged in! Please log in to get access", 401)
-    );
+    if (!localToken) {
+      return next(
+        new AppError("You are not logged in! Please log in to get access", 401)
+      );
+    }
   }
 
   const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
