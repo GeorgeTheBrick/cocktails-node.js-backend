@@ -18,7 +18,7 @@ app.enable("trust proxy");
 app.use(
   cors({
     credentials: true,
-    origin: [process.env.CORS_ORIGIN, "http://127.0.0.1:4200"],
+    origin: [process.env.CORS_ORIGIN, "http://localhost:4200"],
   })
 );
 
