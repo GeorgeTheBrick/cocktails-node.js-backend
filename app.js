@@ -20,41 +20,25 @@ app.use(
   cors({
     credentials: true,
     origin: [process.env.CORS_ORIGIN],
-    maxAge: 86400,
   })
 );
 
-app.options(
-  "https://cocktails-node-js.herokuapp.com",
-  cors({
-    methods: "PUT, POST, PATCH, DELETE, GET",
-    allowedHeaders:
-      "*, id, role, Origin, X-Requested-With, Content-Type, Accept, Authorization",
-  })
-);
+app.options("*", cors());
+
+// app.options(
+//   "https://cocktails-node-js.herokuapp.com",
+//   cors({
+//     methods: "PUT, POST, PATCH, DELETE, GET",
+//     allowedHeaders:
+//       "*, id, role, Origin, X-Requested-With, Content-Type, Accept, Authorization",
+//   })
+// );
 
 app.use(helmet());
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
-
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-
-// app.use((req, res, next) => {
-//   res.header("Access-Control-Allow-Origin", process.env.CORS_ORIGIN);
-//   res.header("Access-Control-Allow-Headers", "*", "id", "role");
-//   res.header("Access-Control-Allow-Credentials", true);
-//   if (req.method === "OPTIONS") {
-//     res.header(
-//       "Access-Control-Allow-Methods",
-//       "PUT, POST, PATCH, DELETE, GET, OPTIONS"
-//     );
-//     return res.status(200).json({});
-//   }
-//   next();
-// });
 
 const limiter = rateLimit({
   max: 200,
