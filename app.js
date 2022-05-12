@@ -6,7 +6,6 @@ const xss = require("xss-clean");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const helmet = require("helmet");
-const bodyParser = require("body-parser");
 const AppError = require("./utils/appError");
 const globalErrorHandler = require("./controllers/errorController");
 const cocktailRouter = require("./routes/cocktailRoutes");
