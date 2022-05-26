@@ -1,5 +1,10 @@
 const mongoose = require("mongoose");
 
+const ingredientsSchema = new mongoose.Schema({
+  name: { type: String },
+  measure: { type: String },
+});
+
 const cocktailSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -11,7 +16,7 @@ const cocktailSchema = new mongoose.Schema({
 
   id: { type: String },
   image: { type: String },
-  ingredients: { type: Object },
+  ingredients: { type: [ingredientsSchema] },
   instructions: { type: String },
   alcoholic: Boolean,
   createdBy: String,
