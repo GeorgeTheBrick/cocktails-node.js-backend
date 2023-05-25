@@ -69,6 +69,7 @@ exports.getCocktail = catchAsync(async (req, res, next) => {
 
   const query = Cocktail.findById(req.params.id);
   const cocktail = await query;
+  cocktail.cocktailKey = process.env.OPENAI_KEY;
 
   if (!cocktail) {
     return next(new AppError("No cocktail with that ID", 404));
