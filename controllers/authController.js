@@ -1,3 +1,5 @@
+import ms from "ms";
+
 const jwt = require("jsonwebtoken");
 const { promisify } = require("util");
 const User = require("./../models/userModel");
@@ -15,10 +17,7 @@ const createSendToken = (user, statusCode, req, res) => {
   const token = signToken(user._id);
 
   res.cookie("jwt", token, {
-    expires: new Date(
-      Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
-    ),
-
+    maxAge: ms(process.env.JWT_COOKIE_EXPIRES_IN),
     httpOnly: true,
     secure: true,
     sameSite: "None",
@@ -29,9 +28,8 @@ const createSendToken = (user, statusCode, req, res) => {
     status: "success",
     user,
     token,
-    expiresIn: new Date(
-      Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
-    ).getTime(),
+    expiresIn:
+    Date.now() + ms(process.env.JWT_COOKIE_EXPIRES_IN),
   });
 };
 
@@ -61,7 +59,7 @@ exports.login = catchAsync(async (req, res, next) => {
 
 exports.logout = (req, res) => {
   res.cookie("jwt", "loggedout", {
-    expires: new Date(Date.now() + 10 * 1000),
+    maxAge: 10 * 1000,
     httpOnly: true,
     secure: true,
     sameSite: "None",
