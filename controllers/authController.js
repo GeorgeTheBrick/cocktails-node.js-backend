@@ -13,11 +13,9 @@ const signToken = (id) => {
 
 const createSendToken = (user, statusCode, req, res) => {
   const token = signToken(user._id);
-  const cookieDays = parseInt(process.env.JWT_COOKIE_EXPIRES_IN);
 
-  console.log(process.env.JWT_EXPIRES_IN);
   res.cookie("jwt", token, {
-    expiresIn: new Date(
+    expires: new Date(
       Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
     ),
     httpOnly: true,
@@ -62,7 +60,7 @@ exports.login = catchAsync(async (req, res, next) => {
 
 exports.logout = (req, res) => {
   res.cookie("jwt", "loggedout", {
-    expiresIn: new Date(Date.now() + 10 * 1000),
+    expires: new Date(Date.now() + 10 * 1000),
     httpOnly: true,
     secure: true,
     sameSite: "None",
