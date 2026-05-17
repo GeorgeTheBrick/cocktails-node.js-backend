@@ -20,6 +20,7 @@ const cocktailSchema = new mongoose.Schema({
   instructions: { type: String },
   alcoholic: Boolean,
   createdBy: String,
+  cocktailKey: String,
 });
 
 const Cocktail = mongoose.model("Cocktail", cocktailSchema);
